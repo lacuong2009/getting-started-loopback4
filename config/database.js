@@ -8,7 +8,7 @@ module.exports = {
             database: 'loopback',
             username: 'root',
             password: '',
-            host: '172.0.0.1'
+            host: 'localhost'
         }
     }
 };

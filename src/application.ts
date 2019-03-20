@@ -9,8 +9,7 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import * as path from 'path';
 import {MySequence} from './sequence';
-import {Sequelize} from "sequelize-typescript";
-const database = require('../../config/database.js');
+import {AppComponent} from "./app.component";
 
 export class GettingStartedApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -29,7 +28,7 @@ export class GettingStartedApplication extends BootMixin(
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
-
+    this.component(AppComponent);
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
@@ -40,11 +39,5 @@ export class GettingStartedApplication extends BootMixin(
         nested: true,
       },
     };
-
-      let config: any = database['connections'][database['default']];
-      let sequelize = new Sequelize(config);
-      sequelize.addModels([__dirname + '/models']);
-
-      this.application.bind('Sequelize').to(sequelize);
   }
 }
